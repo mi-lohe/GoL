@@ -1,7 +1,46 @@
-  X  
-  XXX
-  X
-XXXX
 
 
-XXXXX
+                   XX      XX                                 
+                  X X      X X                           
+                  X          X                           XXXXXX XX 
+               XX X          X XX                        XXXXXX XX    
+               XX X X  XX  X X XX                               XX
+                  X X X  X X X                           XX     XX
+                  X X X  X X X                           XX     XX
+               XX X X  XX  X X XX                        XX     XX
+               XX X          X XX                        XX
+                  X          X                           XX XXXXXX
+                  X X      X X                           XX XXXXXX
+                   XX      XX
+
+
+
+
+
+
+           XX
+          X         
+         XX  X
+        X    X X   X X
+       XXXXX      X  X        X
+      X      XX  XX       
+     XXXXXXX     X  X   XXXX X
+  XX        XX XXX  X   XX   X
+ X   XXXXX      XXX   X      XX
+X   X     X  X    X    XXX   XX
+X     XXX       X   XX       XX
+XXX    X        X X     XXX  X
+        X      X        XX   XXX
+XXX   XX        X X     XXX  X
+X     XXX       X   XX       XX
+X   X     X       X    XXX   XX
+ X   XXXXX      XXX   X      XX 
+  XX        XX XXX  X   XX   X
+     XXXXXXX     X  X   XXXX X
+      X      XX  XX        XXXX
+       XXXXX      X  X        X
+        X    X X   X X
+         XX  X
+          X
+           XX
+
