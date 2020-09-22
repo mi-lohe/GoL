@@ -48,8 +48,8 @@ def CursorPos(x,y): #Place le curseur sur une position x , y spécifié
 
 def AffMatrice1 (Matr): #méthode d'affichage lente et obsolète
     os.system("cls")
-    for g in range (1,HautMatrice):
-        for h in range (1,LargMatrice):
+    for g in range (0,HautMatrice):
+        for h in range (0,LargMatrice):
             if Matr[h][g] == True:
                 print(Fore.BLUE + "██",end="")
             else :
@@ -57,55 +57,50 @@ def AffMatrice1 (Matr): #méthode d'affichage lente et obsolète
         print("")
 
 def AffMatrice2 (Matr):#méthode d'affichage par balayage mais sûre
-    for g in range (1,HautMatrice-1):
-        for h in range (1,LargMatrice-1):
-            if Matr[h][g]:
-                CursorPos(2*h,g)
-                print(Fore.BLUE + "██")
-            else :
-                CursorPos(2*h,g)
-                print(Fore.YELLOW +"██")
-
-def AffMatrice3 (Matr):#méthode d'affiche ultra rapide si peu de cellule , mais rencontre encore des glitchs de supressions
-    for g in range (1,HautMatrice-1):
-        for h in range (1,LargMatrice-1):
-            if combVoisin2(Matr,h,g) > 0 :
-                if Matr[h][g] == True:
-                    CursorPos((h*2),g)
-                    print(Fore.BLUE + "██")
-                else :
-                    CursorPos((h*2),g)
-                    print(Fore.YELLOW +"██")
-
-def AffMatrice4 (Matr,MatrPrec):#méthode d'affiche ultra rapide si peu de cellule 
     for g in range (0,HautMatrice):
         for h in range (0,LargMatrice):
-            if (combVoisin2(Matr,h,g,LargMatrice,HautMatrice,True) > 0 ) or (Matr[h][g] != MatrPrec[h][g]) :
+            if Matr[h][g]:
+                CursorPos(2*h,g)
+                print(Fore.YELLOW+ "██")
+            else :
+                CursorPos(2*h,g)
+                print(Fore.BLUE+ "██") #"██"
+
+def AffMatrice3 (Matr):#méthode d'affiche ultra rapide si peu de cellule , mais rencontre encore des glitchs de supressions
+    for g in range (0,HautMatrice):
+        for h in range (0,LargMatrice):
+            if combVoisin2(Matr,h,g,LargMatrice,HautMatrice,False) > 0 :
                 if Matr[h][g] == True:
                     CursorPos((h*2),g)
-                    print(Fore.BLUE + "██")
+                    print(Fore.BLUE + "██",end="")
                 else :
                     CursorPos((h*2),g)
-                    print(Fore.YELLOW +"██")
+                    print(Fore.YELLOW +"██",end="")
 
-def AffDebug(Matr):
-    AffMatrice4(Matr)
-    for g in range (1,HautMatrice-1):
-        for h in range (LargMatrice-1):
-            print(combVoisin2(MemMatrice,h,g,LargMatrice,HautMatrice,False)," ",end="")
-        print("")
+def AffMatrice4 (Matr,MatrPrec):#méthode d'affiche ultra rapide si peu de cellule 
+    for g in range(1,HautMatrice,1):
+        for h in range(1,LargMatrice,1):
+            if (combVoisin2(Matr,h,g,LargMatrice,HautMatrice,True) > 0 ) or (Matr[h][g] != MatrPrec[h][g]) :
+                
+                if Matr[h][g] == True:
+                    CursorPos((2*h),g)
+                    print(Fore.BLUE+"██")
+                else :
+                    CursorPos((2*h),g)
+                    print(Fore.YELLOW+"██")
+        #time.sleep(0.1)
 
 def combVoisin(h,m,n):
     return  h[m-1][n-1] + h[m-1][n] + h[m-1][n+1] + h[m][n-1] + h[m][n+1] + h[m+1][n-1] + h[m+1][n] + h[m+1][n+1] 
 
-def combVoisinCent(h,m,n):
+def combVoisinCentr(h,m,n):
     return  h[m-1][n-1] + h[m-1][n] + h[m-1][n+1] + h[m][n-1] + h[m][n+1] + h[m+1][n-1] + h[m+1][n] + h[m+1][n+1] + h[m][n]
 
 def combVoisin2(h,m,n,mm,nm,CenterInclude):
     s = 0
     for j in range (-1,2,1):
         for i in range(-1,2,1):
-            if (h[(m+j) % mm][(n+i) % nm] == True) and (CenterInclude  or not((i == 0) and (j == 0))):
+            if (h[(m+i) % mm][(n+j) % nm] == True) and (CenterInclude  or not((i == 0) and (j == 0))):
              s = s + 1
 
     return s
@@ -127,7 +122,7 @@ def CalcGoL():
 
 init()
 LargMatrice = 100
-HautMatrice = 50
+HautMatrice =50
 simActive = "INFINITE" # ON:Lance la simulation avec un temp fini/OFF:Lance que la première étape/INFINITE:la simulation ne s'arrête jamais 
 nbrIteration = 0
 ModeChargement = "J"
@@ -140,7 +135,7 @@ while (ModeChargement != 'R') and (ModeChargement != 'N') and (ModeChargement !=
     
     for i in range (int(LargMatrice/2)-20,int(LargMatrice/2)+20) :
         CursorPos(i,8)
-        print("-")
+        print("j")
     
     CursorPos(int(LargMatrice/2)-22,10)
     print("Mode R : Placement randomisée des cellules")
@@ -169,9 +164,9 @@ MemMatrice = deepcopy(MatriceMonde)
 
 if ModeChargement == 'N':
     Vaisseau ("planneur", 4,40)
-    Vaisseau ("LWSS",15,30)
-    Vaisseau ("point",25,20)
-    Vaisseau ("LWSS",15,10)
+    #Vaisseau ("LWSS",15,30)
+    #"Vaisseau ("point",25,20)
+    #Vaisseau ("LWSS",15,10)
 
 #Creation d'une matrice à  n-1 étape et inversé pour forcer la MAJ complète de l'écran 
 for y in range(0,HautMatrice):
@@ -179,7 +174,9 @@ for y in range(0,HautMatrice):
         MatricePrec[x][y] = not MatriceMonde[x][y]
 
 
+#AffMatrice4(MatriceMonde,MatricePrec)
 AffMatrice4(MatriceMonde,MatricePrec)
+#AffMatrice2(MatriceMonde)
 while (simActive == "ON") or (simActive == "INFINITE"): #Boucle principale 
     #time.sleep(1)
     
@@ -197,19 +194,14 @@ while (simActive == "ON") or (simActive == "INFINITE"): #Boucle principale
     if keyboard.is_pressed('r'):
         enPause = False
     
-    MemMatrice = deepcopy(MatriceMonde)
-    #AffDebug()
-    
     if enPause == False :
+       
         MatricePrec = deepcopy(MatriceMonde)
+        MemMatrice = deepcopy(MatriceMonde)
 
         CalcGoL()
+        #AffMatrice2(MatriceMonde)
         AffMatrice4(MatriceMonde,MatricePrec)
-    #MatriceMonde[5][5] = True
-    #MatriceMonde[5][6] = True
-    #MatriceMonde[4][5] = True
-    #print(combVoisin3(MatriceMonde,4,5,LargMatrice,HautMatrice))
-
 os.system("cls")
 print("GOODBYE")
 time.sleep(1)
