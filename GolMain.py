@@ -122,10 +122,10 @@ def CalcGoL():
 
 init()
 LargMatrice = 100
-HautMatrice =50
-simActive = "INFINITE" # ON:Lance la simulation avec un temp fini/OFF:Lance que la première étape/INFINITE:la simulation ne s'arrête jamais 
+HautMatrice = 50
+simActive = "NULL" # ON:Lance la simulation avec un temp fini/OFF:Lance que la première étape/INFINITE:la simulation ne s'arrête jamais 
 nbrIteration = 0
-ModeChargement = "J"
+ModeChargement = "NULL"
 ITERATIONMAX = 400
 enPause = False
 
@@ -135,7 +135,7 @@ while (ModeChargement != 'R') and (ModeChargement != 'N') and (ModeChargement !=
     
     for i in range (int(LargMatrice/2)-20,int(LargMatrice/2)+20) :
         CursorPos(i,8)
-        print("j")
+        print("─")
     
     CursorPos(int(LargMatrice/2)-22,10)
     print("Mode R : Placement randomisée des cellules")
@@ -145,8 +145,26 @@ while (ModeChargement != 'R') and (ModeChargement != 'N') and (ModeChargement !=
     print("Mode T : Placement des cellules en fonction de Start.txt")
     CursorPos(int(LargMatrice/2)-22,15)
     ModeChargement = input("Réponse (R/N/T) :")
-    print(ModeChargement)
     
+
+
+while (simActive != 'OFF') and (simActive != 'ON') and (simActive != 'INFINITE') :
+    os.system("cls")
+    
+    for i in range (int(LargMatrice/2)-20,int(LargMatrice/2)+20) :
+        CursorPos(i,8)
+        print("─")
+    
+    CursorPos(int(LargMatrice/2)-22,10)
+    print("Mode On : On lance le programme avec un nombre d'itérations fini ")
+    CursorPos(int(LargMatrice/2)-22,11)
+    print('Mode OFF : execute une seule fois la boucle')
+    CursorPos(int(LargMatrice/2)-22,12)
+    print("Mode INFINITE : Vers 'linfini et l'au dela !")
+    CursorPos(int(LargMatrice/2)-22,15)
+    simActive = input("Réponse (ON/OFF/INFINITE) :")
+    
+        
 MatriceMonde = [[ False for i in range(HautMatrice)] for j in range(LargMatrice)]
 
 if ModeChargement == "R" : # demande si on commence le jeu avec une partie randomisée ou non 
@@ -202,6 +220,7 @@ while (simActive == "ON") or (simActive == "INFINITE"): #Boucle principale
         CalcGoL()
         #AffMatrice2(MatriceMonde)
         AffMatrice4(MatriceMonde,MatricePrec)
+
 os.system("cls")
 print("GOODBYE")
 time.sleep(1)
